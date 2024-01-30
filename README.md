@@ -7,11 +7,17 @@ Bienvenue dans le projet de gestion de bibliothèque développé avec Symfony. C
 Avant de pouvoir passer à l'installation, il vous faudra dans un premier temps installer tous ces outils indispensables, pour l'utilisation de cette application.
 
 -PHP 8
+
 -Symfony (cli)
+
 -Composer
+
 -Node.js
+
 -npm
+
 -Angular (cli)
+
 -VSCode
 
 ## Installation
