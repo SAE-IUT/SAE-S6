@@ -1,4 +1,4 @@
-# SAE-S6 - estion de Bibliothèque avec Symfony
+# SAE-S6 - Gestion de Bibliothèque avec Symfony
 
 Bienvenue dans le projet de gestion de bibliothèque développé avec Symfony. Ce projet vise à fournir une application de gestion complète pour une bibliothèque, en utilisant le framework Symfony.
 
