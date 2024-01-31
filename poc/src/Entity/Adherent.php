@@ -25,9 +25,8 @@ class Adherent
     #[ORM\Column(length: 255)]
     private ?string $prenom = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $dateNaiss = null;
-
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private ?\DateTimeInterface $dateNaiss = null;
     #[ORM\Column(length: 255)]
     private ?string $email = null;
 
@@ -40,7 +39,7 @@ class Adherent
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $photo = null;
 
-    #[ORM\ManyToMany(targetEntity: emprunt::class, inversedBy: 'adherents')]
+    #[ORM\ManyToMany(targetEntity: Emprunt::class, inversedBy: 'adherents')]
     private Collection $emprunt;
 
     #[ORM\OneToMany(mappedBy: 'adherent', targetEntity: Reservations::class)]
@@ -93,17 +92,24 @@ class Adherent
         return $this;
     }
 
-    public function getDateNaiss(): ?string
-    {
-        return $this->dateNaiss;
-    }
+/**
+ * @return \DateTimeInterface|null
+ */
+public function getDateNaiss(): ?\DateTimeInterface
+{
+    return $this->dateNaiss;
+}
 
-    public function setDateNaiss(string $dateNaiss): static
-    {
-        $this->dateNaiss = $dateNaiss;
+/**
+ * @param \DateTimeInterface|null $dateNaiss
+ */
+public function setDateNaiss(?\DateTimeInterface $dateNaiss): static
+{
+    $this->dateNaiss = $dateNaiss;
 
-        return $this;
-    }
+    return $this;
+}
+
 
     public function getEmail(): ?string
     {
@@ -161,7 +167,7 @@ class Adherent
         return $this->emprunt;
     }
 
-    public function addEmprunt(emprunt $emprunt): static
+    public function addEmprunt(Emprunt $emprunt): static
     {
         if (!$this->emprunt->contains($emprunt)) {
             $this->emprunt->add($emprunt);
@@ -170,7 +176,7 @@ class Adherent
         return $this;
     }
 
-    public function removeEmprunt(emprunt $emprunt): static
+    public function removeEmprunt(Emprunt $emprunt): static
     {
         $this->emprunt->removeElement($emprunt);
 
@@ -205,5 +211,9 @@ class Adherent
         }
 
         return $this;
+    }
+    public function __toString()
+    {
+        return $this->nom;
     }
 }

@@ -13,6 +13,9 @@ use App\Entity\Categorie;
 use App\Entity\Emprunt;
 use App\Entity\Livre;
 use App\Entity\Reservations;
+use App\Entity\Utilisateur;
+
+
 class DashboardController extends AbstractDashboardController
 {
     #[Route('/admin', name: 'admin')]
@@ -39,6 +42,7 @@ class DashboardController extends AbstractDashboardController
             yield MenuItem::linkToCrud('Livre', 'fa fa-file-text', Livre::class);
             yield MenuItem::linkToCrud('Reservations', 'fa fa-file-text', Reservations::class);
             yield MenuItem::section('Configuration');
+
             
     }
 }

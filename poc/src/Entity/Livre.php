@@ -28,14 +28,14 @@ class Livre
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $photoCouverture = null;
 
-    #[ORM\ManyToMany(targetEntity: auteur::class, inversedBy: 'livres')]
+    #[ORM\ManyToMany(targetEntity: Auteur::class, inversedBy: 'livres')]
     private Collection $auteur;
 
-    #[ORM\OneToMany(mappedBy: 'livre', targetEntity: emprunt::class)]
+    #[ORM\OneToMany(mappedBy: 'livre', targetEntity: Emprunt::class)]
     private Collection $emprunt;
 
     #[ORM\OneToOne(inversedBy: 'livre', cascade: ['persist', 'remove'])]
-    private ?reservations $reservations = null;
+    private ?Reservations $reservations = null;
 
     #[ORM\ManyToMany(targetEntity: Categorie::class, mappedBy: 'livre')]
     private Collection $categories;
@@ -108,7 +108,7 @@ class Livre
         return $this->auteur;
     }
 
-    public function addAuteur(auteur $auteur): static
+    public function addAuteur(Auteur $auteur): static
     {
         if (!$this->auteur->contains($auteur)) {
             $this->auteur->add($auteur);
@@ -117,7 +117,7 @@ class Livre
         return $this;
     }
 
-    public function removeAuteur(auteur $auteur): static
+    public function removeAuteur(Auteur $auteur): static
     {
         $this->auteur->removeElement($auteur);
 
@@ -132,7 +132,7 @@ class Livre
         return $this->emprunt;
     }
 
-    public function addEmprunt(emprunt $emprunt): static
+    public function addEmprunt(Emprunt $emprunt): static
     {
         if (!$this->emprunt->contains($emprunt)) {
             $this->emprunt->add($emprunt);
@@ -142,7 +142,7 @@ class Livre
         return $this;
     }
 
-    public function removeEmprunt(emprunt $emprunt): static
+    public function removeEmprunt(Emprunt $emprunt): static
     {
         if ($this->emprunt->removeElement($emprunt)) {
             // set the owning side to null (unless already changed)
@@ -154,12 +154,12 @@ class Livre
         return $this;
     }
 
-    public function getReservations(): ?reservations
+    public function getReservations(): ?Reservations
     {
         return $this->reservations;
     }
 
-    public function setReservations(?reservations $reservations): static
+    public function setReservations(?Reservations $reservations): static
     {
         $this->reservations = $reservations;
 
@@ -191,5 +191,9 @@ class Livre
         }
 
         return $this;
+    }
+    public function __toString()
+    {
+        return $this->titre;
     }
 }

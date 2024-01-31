@@ -4,9 +4,11 @@ namespace App\Controller\Admin;
 
 use App\Entity\Adherent;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
+use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 
 class AdherentCrudController extends AbstractCrudController
 {
@@ -15,14 +17,20 @@ class AdherentCrudController extends AbstractCrudController
         return Adherent::class;
     }
 
-    /*
+    
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id'),
-            TextField::new('title'),
-            TextEditorField::new('description'),
+            Field::new('dateAdhesion')->setFormTypeOption('widget', 'single_text'),
+            TextField::new('nom'),
+            TextField::new('prenom'),
+            DateField::new('dateNaiss'),
+            TextField::new('email'),
+            IntegerField::new('adressePostale'),
+            IntegerField::new('numTel'),
+            TextField::new('photo'),
+
         ];
     }
-    */
+
 }

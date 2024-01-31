@@ -22,7 +22,7 @@ class Categorie
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
-    #[ORM\ManyToMany(targetEntity: livre::class, inversedBy: 'categories')]
+    #[ORM\ManyToMany(targetEntity: Livre::class, inversedBy: 'categories')]
     private Collection $livre;
 
     public function __construct()
@@ -67,7 +67,7 @@ class Categorie
         return $this->livre;
     }
 
-    public function addLivre(livre $livre): static
+    public function addLivre(Livre $livre): static
     {
         if (!$this->livre->contains($livre)) {
             $this->livre->add($livre);
@@ -76,10 +76,15 @@ class Categorie
         return $this;
     }
 
-    public function removeLivre(livre $livre): static
+    public function removeLivre(Livre $livre): static
     {
         $this->livre->removeElement($livre);
 
         return $this;
     }
+    public function __toString()
+    {
+        return $this->nom;
+    }
+
 }

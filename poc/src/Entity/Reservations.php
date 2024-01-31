@@ -18,7 +18,7 @@ class Reservations
     private ?\DateTimeInterface $dateResa = null;
 
     #[ORM\ManyToOne(inversedBy: 'reservations')]
-    private ?adherent $adherent = null;
+    private ?Adherent $adherent = null;
 
     #[ORM\OneToOne(mappedBy: 'reservations', cascade: ['persist', 'remove'])]
     private ?Livre $livre = null;
@@ -40,12 +40,12 @@ class Reservations
         return $this;
     }
 
-    public function getAdherent(): ?adherent
+    public function getAdherent(): ?Adherent
     {
         return $this->adherent;
     }
 
-    public function setAdherent(?adherent $adherent): static
+    public function setAdherent(?Adherent $adherent): static
     {
         $this->adherent = $adherent;
 
@@ -72,5 +72,9 @@ class Reservations
         $this->livre = $livre;
 
         return $this;
+    }
+    public function __toString()
+    {
+        return (string) $this->id;
     }
 }

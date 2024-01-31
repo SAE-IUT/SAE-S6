@@ -22,11 +22,17 @@ class Emprunt
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $dateRetour = null;
 
-    #[ORM\ManyToMany(targetEntity: Adherent::class, mappedBy: 'emprunt')]
-    private Collection $adherents;
 
     #[ORM\ManyToOne(inversedBy: 'emprunt')]
     private ?Livre $livre = null;
+
+/**
+     * @var Collection<int, Adherent>
+     */
+    private Collection $adherents;
+
+    #[ORM\ManyToOne(inversedBy: 'emprunts')]
+    private ?Adherent $adherent = null;
 
     public function __construct()
     {
@@ -62,33 +68,6 @@ class Emprunt
         return $this;
     }
 
-    /**
-     * @return Collection<int, Adherent>
-     */
-    public function getAdherents(): Collection
-    {
-        return $this->adherents;
-    }
-
-    public function addAdherent(Adherent $adherent): static
-    {
-        if (!$this->adherents->contains($adherent)) {
-            $this->adherents->add($adherent);
-            $adherent->addEmprunt($this);
-        }
-
-        return $this;
-    }
-
-    public function removeAdherent(Adherent $adherent): static
-    {
-        if ($this->adherents->removeElement($adherent)) {
-            $adherent->removeEmprunt($this);
-        }
-
-        return $this;
-    }
-
     public function getLivre(): ?Livre
     {
         return $this->livre;
@@ -97,6 +76,22 @@ class Emprunt
     public function setLivre(?Livre $livre): static
     {
         $this->livre = $livre;
+
+        return $this;
+    }
+    public function __toString()
+    {
+        return $this->id;
+    }
+
+    public function getAdherent(): ?adherent
+    {
+        return $this->adherent;
+    }
+
+    public function setAdherent(?adherent $adherent): static
+    {
+        $this->adherent = $adherent;
 
         return $this;
     }
