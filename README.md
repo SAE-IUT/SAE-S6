@@ -2,7 +2,7 @@
 
 Bienvenue dans le projet de gestion de bibliothèque développé avec Symfony. Ce projet vise à fournir une application de gestion complète pour une bibliothèque, en utilisant le framework Symfony.
 
-## prérequis
+## Prérequis
 
 Avant de pouvoir passer à l'installation, il vous faudra dans un premier temps installer tous ces outils indispensables, pour l'utilisation de cette application.
 
