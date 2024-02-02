@@ -7,8 +7,10 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Metadata\ApiResource;
 
 #[ORM\Entity(repositoryClass: EmpruntRepository::class)]
+#[ApiResource()]
 class Emprunt
 {
     #[ORM\Id]
@@ -81,7 +83,7 @@ class Emprunt
     }
     public function __toString()
     {
-        return $this->id;
+        return $this-> id;
     }
 
     public function getAdherent(): ?adherent
