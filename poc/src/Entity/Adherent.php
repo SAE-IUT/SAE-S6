@@ -9,8 +9,10 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
+use ApiPlatform\Metadata\ApiResource;
 
 #[ORM\Entity(repositoryClass: AdherentRepository::class)]
+#[ApiResource()]
 class Adherent implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
