@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Auteur } from '../models/auteur';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-auteurs-list',
@@ -6,5 +8,13 @@ import { Component } from '@angular/core';
   styleUrl: './auteurs-list.component.css'
 })
 export class AuteursListComponent {
+  auteurs: Auteur[] = [];
+ 
+  constructor(private apiService: ApiService) {}
 
+  ngOnInit(): void {
+    this.apiService.getAuteurs().subscribe((data: Auteur[]) => {
+      this.auteurs = data;
+    });
+  }
 }
