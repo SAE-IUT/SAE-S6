@@ -37,7 +37,7 @@ class Livre
     #[ORM\OneToOne(inversedBy: 'livre', cascade: ['persist', 'remove'])]
     private ?Reservations $reservations = null;
 
-    #[ORM\ManyToMany(targetEntity: Categorie::class, mappedBy: 'livre')]
+    #[ORM\ManyToMany(targetEntity: Categorie::class, inversedBy: 'livre')]
     private Collection $categories;
 
     public function __construct()
