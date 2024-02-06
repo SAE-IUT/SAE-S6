@@ -7,7 +7,7 @@ export class Adherent {
     public dateAdhesion: Date,
     public nom : string,
     public prenom: string,
-    public dateNaissance: Date,
+    public dateNaiss: Date,
     public email: string,
     public adressePostale: string,
     public numTel: string,

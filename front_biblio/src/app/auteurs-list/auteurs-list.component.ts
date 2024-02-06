@@ -8,6 +8,7 @@ import { ApiService } from '../services/api.service';
   styleUrl: './auteurs-list.component.css'
 })
 export class AuteursListComponent {
+  loading = true;
   auteurs: Auteur[] = [];
  
   constructor(private apiService: ApiService) {}
@@ -15,8 +16,11 @@ export class AuteursListComponent {
   ngOnInit(): void {
     this.apiService.getAuteurs().subscribe((data: Auteur[]) => {
       this.auteurs = data;
+      console.log(this.auteurs);
     });
-    console.log(this.auteurs);
-    
+    setTimeout(() => {
+      this.loading = false;
+
+    }, 500);
   }
 }

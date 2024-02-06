@@ -8,6 +8,7 @@ import { ApiService } from '../services/api.service';
   styleUrl: './adherents-list.component.css'
 })
 export class AdherentsListComponent {
+  loading = true;
   adherents: Adherent[] = [];
  
   constructor(private apiService: ApiService) {}
@@ -15,6 +16,12 @@ export class AdherentsListComponent {
   ngOnInit(): void {
     this.apiService.getAdherents().subscribe((data: Adherent[]) => {
       this.adherents = data;
+      // console.log(this.adherents);
     });
+
+    setTimeout(() => {
+      this.loading = false;
+
+    }, 500);
   }
 }
