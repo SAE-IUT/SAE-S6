@@ -48,7 +48,7 @@ class Adherent implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $adressePostale = null;
 
     #[ORM\Column]
-    private ?int $numTel = null;
+    private ?string $numTel = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $photo = null;
@@ -203,12 +203,12 @@ public function setDateNaiss(?\DateTimeInterface $dateNaiss): static
         return $this;
     }
 
-    public function getNumTel(): ?int
+    public function getNumTel(): ?string
     {
         return $this->numTel;
     }
 
-    public function setNumTel(int $numTel): static
+    public function setNumTel(string $numTel): static
     {
         $this->numTel = $numTel;
 
