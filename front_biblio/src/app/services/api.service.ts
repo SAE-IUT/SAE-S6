@@ -11,7 +11,7 @@ import { Emprunt } from '../models/emprunt';
   providedIn: 'root'
 })
 export class ApiService {
-  private apiUrl = 'http://127.0.0.1:8000/api'; // URL de notre API
+  private apiUrl = 'http://localhost:8000/api'; // URL de notre API
    
   constructor(
     private http: HttpClient

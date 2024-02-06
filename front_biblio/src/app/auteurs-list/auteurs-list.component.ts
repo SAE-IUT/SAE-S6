@@ -16,5 +16,7 @@ export class AuteursListComponent {
     this.apiService.getAuteurs().subscribe((data: Auteur[]) => {
       this.auteurs = data;
     });
+    console.log(this.auteurs);
+    
   }
 }
