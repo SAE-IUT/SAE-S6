@@ -59,7 +59,6 @@ class Adherent implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column]
     #[Groups(['adherent:read', 'adherent:write'])]
-    private ?int $numTel = null;
     private ?string $numTel = null;
 
     #[ORM\Column(length: 255, nullable: true)]
