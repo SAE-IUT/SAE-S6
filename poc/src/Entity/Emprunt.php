@@ -7,21 +7,26 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use ApiPlatform\Metadata\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
+
+// use ApiPlatform\Metadata\ApiResource;
 
 #[ORM\Entity(repositoryClass: EmpruntRepository::class)]
-#[ApiResource()]
+// #[ApiResource()]
 class Emprunt
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['livre:read', 'livre:write', 'emprunt:read'])]
     private ?int $id = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Groups(['livre:read', 'livre:write', 'emprunt:read', 'categorie:write'])]
     private ?\DateTimeInterface $dateEmprunt = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Groups(['livre:read', 'livre:write', 'emprunt:read', 'categorie:write'])]
     private ?\DateTimeInterface $dateRetour = null;
 
 

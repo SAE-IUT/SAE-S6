@@ -9,48 +9,61 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
-use ApiPlatform\Metadata\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
+// use ApiPlatform\Metadata\ApiResource;
 
 #[ORM\Entity(repositoryClass: AdherentRepository::class)]
-#[ApiResource()]
+// #[ApiResource()]
 class Adherent implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['adherent:read'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true)]
+    #[Groups(['adherent:read', 'adherent:write'])]
     private ?string $email = null;
 
     #[ORM\Column]
+    #[Groups(['adherent:read', 'adherent:write'])]
     private array $roles = [];
 
     /**
      * @var string The hashed password
      */
     #[ORM\Column]
+    #[Groups(['adherent:read', 'adherent:write'])]
     private ?string $password = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Groups(['adherent:read', 'adherent:write'])]
     private ?\DateTimeInterface $dateAdhesion = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['adherent:read', 'adherent:write'])]
     private ?string $nom = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['adherent:read', 'adherent:write'])]
     private ?string $prenom = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Groups(['adherent:read', 'adherent:write'])]
     private ?\DateTimeInterface $dateNaiss = null;
 
     #[ORM\Column]
+    #[Groups(['adherent:read', 'adherent:write'])]
     private ?int $adressePostale = null;
 
     #[ORM\Column]
+    #[Groups(['adherent:read', 'adherent:write'])]
+    private ?int $numTel = null;
     private ?string $numTel = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['adherent:read', 'adherent:write'])]
     private ?string $photo = null;
 
     #[ORM\ManyToMany(targetEntity: Emprunt::class, inversedBy: 'adherents')]
