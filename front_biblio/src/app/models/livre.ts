@@ -12,7 +12,7 @@ export class Livre {
     public langue: string,
     public photoCouverture: string,
     public categories: Categorie[],
-    public auteurs: Auteur[],
+    public auteur: Auteur[],
     public emprunts: Emprunt[],
     public reservations: Reservation[]
   ){}

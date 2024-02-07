@@ -8,6 +8,7 @@ import { ApiService } from '../services/api.service';
   styleUrl: './livres-list.component.css'
 })
 export class LivresListComponent {
+  loading = true;
   livres: Livre[] = [];
  
   constructor(private apiService: ApiService) {}
@@ -15,6 +16,13 @@ export class LivresListComponent {
   ngOnInit(): void {
     this.apiService.getLivres().subscribe((data: Livre[]) => {
       this.livres = data;
+      console.log(this.livres);
+      
     });
+
+    setTimeout(() => {
+      this.loading = false;
+
+    }, 500);
   }
 }

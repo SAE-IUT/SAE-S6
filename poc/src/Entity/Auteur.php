@@ -18,23 +18,23 @@ class Auteur
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['auteur:read'])]
+    #[Groups(['auteur:read', 'livre:read'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['auteur:read', 'auteur:write'])]
+    #[Groups(['livre:read', 'auteur:read', 'auteur:write'])]
     private ?string $nom = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['auteur:read', 'auteur:write'])]
+    #[Groups(['livre:read', 'auteur:read', 'auteur:write'])]
     private ?string $prenom = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    #[Groups(['auteur:read', 'auteur:write'])]
+    #[Groups(['livre: read', 'auteur:read', 'auteur:write'])]
     private ?\DateTimeInterface $dateNaissance = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    #[Groups(['auteur:read', 'auteur:write'])]
+    #[Groups([ 'auteur:write'])]
     private ?\DateTimeInterface $dateDeces = null;
 
     #[ORM\Column(length: 255)]

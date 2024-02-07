@@ -6,6 +6,7 @@ import { LivresListComponent } from './livres-list/livres-list.component';
 import { EmpruntsListComponent } from './emprunts-list/emprunts-list.component';
 import { CategoriesListComponent } from './categories-list/categories-list.component';
 import { AuteursListComponent } from './auteurs-list/auteurs-list.component';
+import { LivreDetailComponent } from './livre-detail/livre-detail.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'categories',  component: CategoriesListComponent },
   { path: 'emprunts',  component: EmpruntsListComponent },
   { path: 'livres',  component: LivresListComponent },
+  { path: 'livres/:titre',  component: LivreDetailComponent },
 
 ];
 

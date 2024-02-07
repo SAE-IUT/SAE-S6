@@ -61,6 +61,11 @@ export class ApiService {
   getLivres(): Observable<Livre[]> {
     return this.http.get<Livre[]>(`${this.apiUrl}/livres`);
   }
+
+  // Lister un livre selon son id
+  getLivreByTitre(titre: string): Observable<Livre[]> {
+    return this.http.get<Livre[]>(`${this.apiUrl}/livres/${titre}`);
+  }
   
   // Ajouter un emprunt
   addLivre(livre: Livre): Observable<Livre> {

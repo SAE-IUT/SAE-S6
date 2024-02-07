@@ -6,22 +6,29 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="/">Accueil</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/adherents">Adhérents</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/auteurs">Auteurs</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/categories">Catégories</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/emprunts">Emprunts</a>
-        </li>
+
         <li class="nav-item">
           <a class="nav-link" routerLink="/livres">Livres</a>
         </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Catégorie
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li *ngFor="let categorie of categories; let i = index">
+              <a class="dropdown-item" href="#">{{categorie.nom}}</a>
+              <hr class="dropdown-divider" *ngIf="i !== categories.length - 1">
+            </li>
+          </ul>
+        </li>
+      
       </ul>
+      
+      <form class="form" style="display: flex; gap: 2%" action="#" method="POST">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
     </div>
   </div>
 </nav>

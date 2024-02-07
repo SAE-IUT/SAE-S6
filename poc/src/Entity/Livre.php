@@ -38,6 +38,7 @@ class Livre
     private ?string $photoCouverture = null;
 
     #[ORM\ManyToMany(targetEntity: Auteur::class, inversedBy: 'livres')]
+    #[Groups(['livre:read', 'livre:write', 'auteur: read', 'auteur: write'])]
     private Collection $auteur;
 
     #[ORM\OneToMany(mappedBy: 'livre', targetEntity: Emprunt::class)]
@@ -47,7 +48,7 @@ class Livre
     private ?Reservations $reservations = null;
 
     #[ORM\ManyToMany(targetEntity: Categorie::class, mappedBy: 'livre')]
-    // #[Groups(['livre:read', 'livre:write'])]
+    #[Groups(['livre:read', 'livre:write'])]
     private Collection $categories;
 
     public function __construct()
