@@ -56,7 +56,7 @@ class DashboardController extends AbstractDashboardController
             yield MenuItem::section('Tableau de bord');
             yield MenuItem::linkToDashboard('Tableau de bord', 'fa fa-home');
         }
-        if ($user && in_array('ROLE_ADMIN', $user->getRoles(), true)) {
+        if ($user && in_array('ROLE_SUPER_ADMIN', $user->getRoles(), true)) {
             // Groupe pour les fonctionnalités principales
             yield MenuItem::section('Gestion des ressources');
             yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-users', AdherentCrudController::getEntityFqcn());

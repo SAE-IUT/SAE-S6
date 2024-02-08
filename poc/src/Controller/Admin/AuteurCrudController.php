@@ -27,7 +27,12 @@ class AuteurCrudController extends AbstractCrudController
             DateField::new('dateNaissance')->setFormTypeOption('widget', 'single_text'),
             DateField::new('dateDeces')->setFormTypeOption('widget', 'single_text'),
             TextField::new('nationalite'),
-            TextField::new('photo'),
+            ImageField::new('photo')
+            ->setLabel('Photo de profil')
+            ->setBasePath('/img/livre')
+            ->setUploadDir('public/img/livre')
+            ->setUploadedFileNamePattern('[randomhash].[extension]')
+            ->setRequired(false),
             TextareaField::new('description'),
             AssociationField::new('livres'),
         ];

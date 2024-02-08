@@ -34,35 +34,28 @@ class Adherent implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      */
     #[ORM\Column]
-    #[Groups(['adherent:read', 'adherent:write'])]
+
     private ?string $password = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    #[Groups(['adherent:read', 'adherent:write'])]
     private ?\DateTimeInterface $dateAdhesion = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['adherent:read', 'adherent:write'])]
     private ?string $nom = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['adherent:read', 'adherent:write'])]
     private ?string $prenom = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    #[Groups(['adherent:read', 'adherent:write'])]
     private ?\DateTimeInterface $dateNaiss = null;
 
     #[ORM\Column]
-    #[Groups(['adherent:read', 'adherent:write'])]
     private ?int $adressePostale = null;
 
     #[ORM\Column]
-    #[Groups(['adherent:read', 'adherent:write'])]
-    private ?string $numTel = null;
+    private ?int $numTel = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Groups(['adherent:read', 'adherent:write'])]
     private ?string $photo = null;
 
     #[ORM\ManyToMany(targetEntity: Emprunt::class, inversedBy: 'adherents')]
@@ -215,12 +208,12 @@ public function setDateNaiss(?\DateTimeInterface $dateNaiss): static
         return $this;
     }
 
-    public function getNumTel(): ?string
+    public function getNumTel(): ?int
     {
         return $this->numTel;
     }
 
-    public function setNumTel(string $numTel): static
+    public function setNumTel(int $numTel): static
     {
         $this->numTel = $numTel;
 
