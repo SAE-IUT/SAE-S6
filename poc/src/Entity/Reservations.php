@@ -5,10 +5,10 @@ namespace App\Entity;
 use App\Repository\ReservationsRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use ApiPlatform\Metadata\ApiResource;
+// use ApiPlatform\Metadata\ApiResource;
 
 #[ORM\Entity(repositoryClass: ReservationsRepository::class)]
-#[ApiResource()]
+// #[ApiResource()]
 class Reservations
 {
     #[ORM\Id]

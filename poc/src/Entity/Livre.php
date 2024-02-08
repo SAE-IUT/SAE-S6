@@ -7,30 +7,38 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use ApiPlatform\Metadata\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
+
+// use ApiPlatform\Metadata\ApiResource;
 
 #[ORM\Entity(repositoryClass: LivreRepository::class)]
-#[ApiResource()]
+// #[ApiResource()]
 class Livre
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['livre:read'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['livre:read', 'livre:write'])]
     private ?string $titre = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Groups(['livre:read', 'livre:write'])]
     private ?\DateTimeInterface $dateSortie = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['livre:read', 'livre:write'])]
     private ?string $langue = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['livre:read', 'livre:write'])]
     private ?string $photoCouverture = null;
 
     #[ORM\ManyToMany(targetEntity: Auteur::class, inversedBy: 'livres')]
+    #[Groups(['livre:read', 'livre:write', 'auteur: read', 'auteur: write'])]
     private Collection $auteur;
 
     #[ORM\OneToMany(mappedBy: 'livre', targetEntity: Emprunt::class)]
@@ -39,7 +47,8 @@ class Livre
     #[ORM\OneToOne(inversedBy: 'livre', cascade: ['persist', 'remove'])]
     private ?Reservations $reservations = null;
 
-    #[ORM\ManyToMany(targetEntity: Categorie::class, inversedBy: 'livre')]
+    #[ORM\ManyToMany(targetEntity: Categorie::class, mappedBy: 'livre')]
+    #[Groups(['livre:read', 'livre:write'])]
     private Collection $categories;
 
     public function __construct()

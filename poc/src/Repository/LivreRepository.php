@@ -21,6 +21,25 @@ class LivreRepository extends ServiceEntityRepository
         parent::__construct($registry, Livre::class);
     }
 
+    public function findByTitreIgnoreCase(string $titre): array
+    {
+        return $this->createQueryBuilder('l')
+            ->andWhere('LOWER(l.titre) = LOWER(:titre)')
+            ->setParameter('titre', $titre)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findLivresByCategorie(string $categorie): array
+    {
+        return $this->createQueryBuilder('l')
+            ->innerJoin('l.categories', 'c')
+            ->andWhere('LOWER(c.nom) = LOWER(:categorie)')
+            ->setParameter('categorie', $categorie)
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return Livre[] Returns an array of Livre objects
 //     */
