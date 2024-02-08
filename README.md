@@ -30,4 +30,4 @@ php bin/console doctrine:migrations:migrate
 
 ## Documentation
 
-La documentation complète du projet est disponible dans le répertoire [docs](#).
+La documentation complète du projet est disponible dans le répertoire [docs](#). (en cours de rédaction)
