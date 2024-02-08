@@ -39,9 +39,14 @@ class Emprunt
     #[ORM\Column(length: 10, nullable: true)]
     private ?string $retard = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $rendu = null;
+
     public function __construct()
     {
         $this->adherents = new ArrayCollection();
+        $this->retard = "Non";
+        $this->rendu = "Non";
     }
 
     public function getId(): ?int
@@ -109,6 +114,18 @@ class Emprunt
     public function setRetard(?string $retard): static
     {
         $this->retard = $retard;
+
+        return $this;
+    }
+
+    public function getRendu(): ?string
+    {
+        return $this->rendu;
+    }
+
+    public function setRendu(?string $rendu): static
+    {
+        $this->rendu = $rendu;
 
         return $this;
     }

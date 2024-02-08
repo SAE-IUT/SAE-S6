@@ -9,9 +9,21 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use App\Repository\LivreRepository;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Reservations;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use Doctrine\ORM\EntityManagerInterface;
 
 class EmpruntCrudController extends AbstractCrudController
 {
+    private $entityManager;
+
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
     public static function getEntityFqcn(): string
     {
         return Emprunt::class;
@@ -27,7 +39,7 @@ class EmpruntCrudController extends AbstractCrudController
 
         ];
     
-        if ($pageName === Crud::PAGE_NEW || $pageName === Crud::PAGE_EDIT) {
+        if ($pageName === Crud::PAGE_NEW) {
             $fields[] = AssociationField::new('livre')
             ->setFormTypeOption('query_builder', function (LivreRepository $entityRepository) {
                 return $entityRepository->createQueryBuilder('e')
@@ -46,10 +58,41 @@ class EmpruntCrudController extends AbstractCrudController
 
         } else {
             $fields[] = AssociationField::new('livre');
-            $fields[] = TextField::new('retard');
+            $fields[] = TextField::new('retard')->setDisabled(true);
+            $fields[] = TextField::new('rendu')->setDisabled(true);
             
         }
+        if ($pageName === Crud::PAGE_EDIT) {
+            $fields[] = AssociationField::new('livre')->setDisabled(true);
+        }
+
         return $fields;
+    }
+
+    public function configureActions(Actions $actions): Actions
+    {
+        $rendreLivreAction = Action::new('rendreLivre', 'Rendre Livre')
+            ->linkToRoute('admin_reservation_rendre_livre', function (Emprunt $emprunt) {
+                return ['id' => $emprunt->getId()];
+            })
+            ->setIcon('fa fa-exchange'); 
+
+        return $actions
+            ->add(Crud::PAGE_INDEX, $rendreLivreAction);
+    }
+    #[Route('/admin/reservation/{id}/rendre-livre', name: 'admin_reservation_rendre_livre')]
+    public function rendreLivre(Emprunt $emprunt): Response
+    {
+        $emprunt->setRendu("Oui");
+        // Logique pour rendre le livre ici
+
+        $this->entityManager->persist($emprunt);
+        $this->entityManager->flush();
+        
+        return $this->redirectToRoute('admin',[
+            'crudControllerFqcn'=>EmpruntCrudController::class,
+            'crudAction'=>'index',
+        ]);
     }
     
 }

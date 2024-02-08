@@ -57,11 +57,17 @@ class ReservationsCrudController extends AbstractCrudController
                         FROM App\Entity\Reservations r
                         WHERE r.livre = e.id
                     )')
-                    ->andWhere('NOT EXISTS(
+                    ->andWhere('(NOT EXISTS(
                         SELECT 1
-                        FROM App\Entity\Emprunt em
-                        WHERE em.livre = e.id
-                    )')
+                        FROM App\Entity\Emprunt em1
+                        WHERE em1.livre = e.id
+                        AND em1.rendu = :rendu
+                    ) OR NOT EXISTS(
+                        SELECT 1
+                        FROM App\Entity\Emprunt em2
+                        WHERE em2.livre = e.id
+                    ))')
+                    ->setParameter('rendu', 'Non')
                     ->orderBy('e.titre', 'ASC');
             });
 
@@ -102,6 +108,7 @@ class ReservationsCrudController extends AbstractCrudController
         $emprunt->setAdherent($reservation->getAdherent());
         $emprunt->setLivre($reservation->getLivre());
         $emprunt->setRetard("Non");
+        $emprunt->setRendu("Non");
         $this->entityManager->persist($emprunt);
         $this->entityManager->flush();
             // Supprimez la réservation
