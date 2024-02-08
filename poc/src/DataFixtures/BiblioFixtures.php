@@ -68,7 +68,7 @@ class BiblioFixtures extends Fixture
             $dateSortie = $faker->dateTimeBetween('-10 years', 'now');
 
             $livre = (new Livre())
-                ->setTitre($faker->title)
+                ->setTitre($faker->name)
                 ->setDateSortie(DateTimeImmutable::createFromMutable($dateSortie))
                 ->setLangue($faker->languageCode)
                 ->setPhotoCouverture('https://picsum.photos/360/360?image='.($i+200));

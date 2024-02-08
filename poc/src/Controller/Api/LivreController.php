@@ -24,14 +24,13 @@ class LivreController extends AbstractController
     #[Route('/api/livres/{titre}', name: 'app_api_livre_detail')]
     public function show(string $titre, LivreRepository $livreRepository): JsonResponse
     {
-        $livre = $livreRepository->findByTitre($titre);
+        $livres = $livreRepository->findByTitreIgnoreCase($titre);
         
-        if (!$livre) {
-            // Gérer le cas où le livre avec l'ID spécifié n'est pas trouvé
-            return $this->json(['message' => 'Livre non trouvé'], 404);
+        if (empty($livres)) {
+            return $this->json(['message' => 'Aucun livre trouvé pour ce titre'], 404);
         }
 
-        return $this->json($livre, 200, [], ['groups' => 'livre:read']);
+        return $this->json($livres, 200, [], ['groups' => 'livre:read']);
     }
 
     #[Route('/api/livre', methods: ['POST'])]

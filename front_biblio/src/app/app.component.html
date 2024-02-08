@@ -24,11 +24,16 @@
         </li>
       
       </ul>
+
       
-      <form class="form" style="display: flex; gap: 2%" action="#" method="POST">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      <form class="form-group" style="display: flex; gap: 2%" action="#" method="POST" (ngSubmit)="onSearch()">
+        <input type="text" class="form-control" placeholder="Rechercher des livres..." list="list-livres" id="input-datalist" [(ngModel)]="selectedLivres" name="search">
+          <datalist id="list-livres">
+              <option *ngFor="let livre of livres">{{ livre.titre }}</option>
+          </datalist>
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Rechercher</button>
       </form>
+      
     </div>
   </div>
 </nav>

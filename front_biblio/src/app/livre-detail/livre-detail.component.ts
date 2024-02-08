@@ -15,18 +15,31 @@ export class LivreDetailComponent {
   constructor(private apiService: ApiService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      const titre = params['titre'];
+      if (titre) {
+        this.loadLivres(titre);
+      }
+    });
+
     const titre = this.route.snapshot.params['titre'];
 
     if (titre) {
       this.apiService.getLivreByTitre(titre).subscribe((data: Livre[]) => {
         this.livres = data;
-        console.log(this.livres);
       });
 
       setTimeout(() => {
         this.loading = false;
   
-      }, 500);
+      }, 800);
     }
+  }
+
+  loadLivres(titre: string): void {
+    this.apiService.getLivreByTitre(titre).subscribe((data: Livre[]) => {
+      this.livres = data;
+      this.loading = false;
+    });
   }
 }
