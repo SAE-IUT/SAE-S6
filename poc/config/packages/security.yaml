@@ -44,16 +44,16 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
+        - { path: ^/sup_admin, roles: ROLE_SUPER_ADMIN }
         - { path: ^/admin, roles: 'ROLE_ADMIN,ROLE_SUPER_ADMIN' }
         - { path: ^/api/login, roles: PUBLIC_ACCESS }
-        - { path: ^/api/adherents, roles: ROLE_USER }
-        - { path: ^/api/auteurs, roles: ROLE_USER }
-        - { path: ^/api/categories, roles: ROLE_USER }
-        - { path: ^/api/emprunts, roles: ROLE_USER }
-        - { path: ^/api/livres, roles: ROLE_USER }
+        - { path: ^/api/adherents, roles: PUBLIC_ACCESS }
+        - { path: ^/api/auteurs, roles: PUBLIC_ACCESS }
+        - { path: ^/api/categories, roles: PUBLIC_ACCESS }
+        - { path: ^/api/emprunts, roles: PUBLIC_ACCESS }
+        - { path: ^/api/livres, roles: PUBLIC_ACCESS }
         - { path: ^/api/livre, roles: ROLE_ADMIN } 
         - { path: ^/api, roles: PUBLIC_ACCESS  }
-        - { path: ^/sup_admin, roles: ROLE_SUPER_ADMIN }
 
 when@test:
     security:

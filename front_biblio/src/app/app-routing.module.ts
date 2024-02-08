@@ -8,13 +8,11 @@ import { CategoriesListComponent } from './categories-list/categories-list.compo
 import { AuteursListComponent } from './auteurs-list/auteurs-list.component';
 import { LivreDetailComponent } from './livre-detail/livre-detail.component';
 import { LivresByCategoryComponent } from './livres-by-category/livres-by-category.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'adherents',  component: AdherentsListComponent },
-  { path: 'auteurs',  component: AuteursListComponent },
-  { path: 'categories',  component: CategoriesListComponent },
-  { path: 'emprunts',  component: EmpruntsListComponent },
+  { path: 'login', component: LoginComponent },
   { path: 'livres',  component: LivresListComponent },
   { path: 'livres/:titre',  component: LivreDetailComponent },
   { path: 'livres/categorie/:nomCategorie',  component: LivresByCategoryComponent },

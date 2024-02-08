@@ -12,7 +12,8 @@
         </li>
 
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
             Catégorie
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -22,18 +23,29 @@
             </li>
           </ul>
         </li>
-      
+
+        <li class="nav-item" *ngIf="authService.currentAuthUserValue.isLogged()">
+          <button class="nav-link" (click)="logout()">
+            Logout
+            <i *ngIf="authService.currentAuthUserValue.isAdmin()">ADMIN</i>
+            <i *ngIf="!authService.currentAuthUserValue.isAdmin()">user</i>
+          </button>
+        </li>
+        <li class="nav-item" *ngIf="!authService.currentAuthUserValue.isLogged()">
+          <a class="nav-link" routerLink="/login">Login</a>
+        </li>
       </ul>
 
-      
+
       <form class="form-group" style="display: flex; gap: 2%" action="#" method="POST" (ngSubmit)="onSearch()">
-        <input type="text" class="form-control" placeholder="Rechercher des livres..." list="list-livres" id="input-datalist" [(ngModel)]="selectedLivres" name="search">
-          <datalist id="list-livres">
-              <option *ngFor="let livre of livres">{{ livre.titre }}</option>
-          </datalist>
+        <input type="text" class="form-control" placeholder="Rechercher des livres..." list="list-livres"
+          id="input-datalist" [(ngModel)]="selectedLivres" name="search">
+        <datalist id="list-livres">
+          <option *ngFor="let livre of livres">{{ livre.titre }}</option>
+        </datalist>
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Rechercher</button>
       </form>
-      
+
     </div>
   </div>
 </nav>
