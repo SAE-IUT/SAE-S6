@@ -33,6 +33,21 @@ class LivreController extends AbstractController
         return $this->json($livres, 200, [], ['groups' => 'livre:read']);
     }
 
+    #[Route('/api/livres/categorie/{nomCategorie}', name: 'app_api_livre_by_categorie')]
+    public function livre_by_category(CategorieRepository $categorieRepository, LivreRepository $livreRepository, string $nomCategorie): JsonResponse
+    {
+        $categories = $categorieRepository->findAll();
+        $categorie = $categorieRepository->findOneBy(['nom' => $nomCategorie]);
+
+        if (empty($categorie)) {
+            return $this->json(['message' => 'Aucune catégorie trouvé'], 404);
+        }
+
+        $livres = $livreRepository->findLivresByCategorie($categorie);
+
+        return $this->json($livres, 200, [], ['groups' => 'livre:read']);
+    }
+
     #[Route('/api/livre', methods: ['POST'])]
     public function create(Request $request, EntityManagerInterface $entityManager): JsonResponse
     {

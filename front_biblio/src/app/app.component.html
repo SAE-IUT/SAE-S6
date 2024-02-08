@@ -17,7 +17,7 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li *ngFor="let categorie of categories; let i = index">
-              <a class="dropdown-item" href="#">{{categorie.nom}}</a>
+              <a class="dropdown-item" [routerLink]="['/livres/categorie', categorie.nom]">{{categorie.nom}}</a>
               <hr class="dropdown-divider" *ngIf="i !== categories.length - 1">
             </li>
           </ul>

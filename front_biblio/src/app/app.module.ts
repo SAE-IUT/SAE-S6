@@ -12,6 +12,7 @@ import { CategoriesListComponent } from './categories-list/categories-list.compo
 import { EmpruntsListComponent } from './emprunts-list/emprunts-list.component';
 import { LivresListComponent } from './livres-list/livres-list.component';
 import { LivreDetailComponent } from './livre-detail/livre-detail.component';
+import { LivresByCategoryComponent } from './livres-by-category/livres-by-category.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { LivreDetailComponent } from './livre-detail/livre-detail.component';
     CategoriesListComponent,
     EmpruntsListComponent,
     LivresListComponent,
-    LivreDetailComponent
+    LivreDetailComponent,
+    LivresByCategoryComponent
   ],
   imports: [
     BrowserModule,
