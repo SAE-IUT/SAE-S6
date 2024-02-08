@@ -44,18 +44,20 @@ class Livre
     #[ORM\OneToMany(mappedBy: 'livre', targetEntity: Emprunt::class)]
     private Collection $emprunt;
 
-    #[ORM\OneToOne(inversedBy: 'livre', cascade: ['persist', 'remove'])]
-    private ?Reservations $reservations = null;
 
     #[ORM\ManyToMany(targetEntity: Categorie::class, mappedBy: 'livre')]
     #[Groups(['livre:read', 'livre:write'])]
     private Collection $categories;
+
+    #[ORM\OneToMany(mappedBy: 'livre', targetEntity: Reservations::class)]
+    private Collection $reservations;
 
     public function __construct()
     {
         $this->auteur = new ArrayCollection();
         $this->emprunt = new ArrayCollection();
         $this->categories = new ArrayCollection();
+        $this->reservations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -165,17 +167,7 @@ class Livre
         return $this;
     }
 
-    public function getReservations(): ?Reservations
-    {
-        return $this->reservations;
-    }
 
-    public function setReservations(?Reservations $reservations): static
-    {
-        $this->reservations = $reservations;
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, Categorie>
@@ -206,5 +198,35 @@ class Livre
     public function __toString()
     {
         return $this->titre;
+    }
+
+    /**
+     * @return Collection<int, Reservations>
+     */
+    public function getReservations(): Collection
+    {
+        return $this->reservations;
+    }
+
+    public function addReservation(Reservations $reservation): static
+    {
+        if (!$this->reservations->contains($reservation)) {
+            $this->reservations->add($reservation);
+            $reservation->setLivre($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReservation(Reservations $reservation): static
+    {
+        if ($this->reservations->removeElement($reservation)) {
+            // set the owning side to null (unless already changed)
+            if ($reservation->getLivre() === $this) {
+                $reservation->setLivre(null);
+            }
+        }
+
+        return $this;
     }
 }
