@@ -22,8 +22,10 @@ class Reservations
     #[ORM\ManyToOne(inversedBy: 'reservations')]
     private ?Adherent $adherent = null;
 
-    #[ORM\OneToOne(mappedBy: 'reservations', cascade: ['persist', 'remove'])]
+    #[ORM\ManyToOne(inversedBy: 'reservations')]
     private ?Livre $livre = null;
+
+
 
     public function getId(): ?int
     {
@@ -54,6 +56,11 @@ class Reservations
         return $this;
     }
 
+    public function __toString()
+    {
+        return (string) $this->id;
+    }
+
     public function getLivre(): ?Livre
     {
         return $this->livre;
@@ -61,22 +68,8 @@ class Reservations
 
     public function setLivre(?Livre $livre): static
     {
-        // unset the owning side of the relation if necessary
-        if ($livre === null && $this->livre !== null) {
-            $this->livre->setReservations(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($livre !== null && $livre->getReservations() !== $this) {
-            $livre->setReservations($this);
-        }
-
         $this->livre = $livre;
 
         return $this;
-    }
-    public function __toString()
-    {
-        return (string) $this->id;
     }
 }

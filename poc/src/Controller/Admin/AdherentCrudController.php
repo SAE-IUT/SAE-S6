@@ -24,7 +24,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityPersistedEvent;
-
+use Symfony\Component\Routing\Annotation\Route;
 class AdherentCrudController extends AbstractCrudController
 {
     public function __construct(
@@ -50,8 +50,9 @@ class AdherentCrudController extends AbstractCrudController
             ChoiceField::new('roles')
               ->setLabel('Rôles')
               ->setChoices([
-                  'Utilisateur' => 'ROLE_USER',
-                  'Administrateur' => 'ROLE_ADMIN',
+                  'Adherent' => 'ROLE_USER',
+                  'Bibliothecaire' => 'ROLE_ADMIN',
+                  'Responsable Bib' => 'ROLE_SUPER_ADMIN',
               ])
               ->allowMultipleChoices()
               ->renderExpanded(),

@@ -36,6 +36,9 @@ class Emprunt
     #[ORM\ManyToOne(inversedBy: 'emprunts')]
     private ?Adherent $adherent = null;
 
+    #[ORM\Column(length: 10, nullable: true)]
+    private ?string $retard = null;
+
     public function __construct()
     {
         $this->adherents = new ArrayCollection();
@@ -94,6 +97,18 @@ class Emprunt
     public function setAdherent(?adherent $adherent): static
     {
         $this->adherent = $adherent;
+
+        return $this;
+    }
+
+    public function getRetard(): ?string
+    {
+        return $this->retard;
+    }
+
+    public function setRetard(?string $retard): static
+    {
+        $this->retard = $retard;
 
         return $this;
     }

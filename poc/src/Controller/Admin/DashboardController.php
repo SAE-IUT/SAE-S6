@@ -14,7 +14,8 @@ use App\Entity\Emprunt;
 use App\Entity\Livre;
 use App\Entity\Reservations;
 use App\Entity\Utilisateur;
-
+use Symfony\Component\Security\Core\Annotation\IsGranted;
+use Symfony\Component\Security\Http\Attribute\IsGranted as AttributeIsGranted;
 
 class DashboardController extends AbstractDashboardController
 {
