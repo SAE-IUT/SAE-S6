@@ -39,7 +39,7 @@ class ReservationsCrudController extends AbstractCrudController
 
         ];
     
-        if ($pageName === Crud::PAGE_NEW || $pageName === Crud::PAGE_EDIT) {
+        if ($pageName === Crud::PAGE_NEW) {
             $fields[] = AssociationField::new('adherent')
             ->setFormTypeOption('query_builder', function (AdherentRepository $entityRepository) {
                 return $entityRepository->createQueryBuilder('a')
@@ -76,6 +76,9 @@ class ReservationsCrudController extends AbstractCrudController
             $fields[] = AssociationField::new('adherent');
             $fields[] = AssociationField::new('livre');
             
+        }
+        if ($pageName === Crud::PAGE_EDIT){
+            $fields[] = AssociationField::new('livre')->setDisabled(true);
         }
     
         return $fields;
