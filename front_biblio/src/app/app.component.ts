@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { ApiService } from './services/api.service';
 import { Categorie } from './models/categorie';
 import { Livre } from './models/livre';
 import { Router } from '@angular/router';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +16,7 @@ export class AppComponent {
   livres: Livre[] = [];
   selectedLivres: string = '';
   
-  constructor(private apiService: ApiService, private router: Router) {}
+  constructor(private apiService: ApiService, public authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     this.apiService.getCategories().subscribe((data: Categorie[]) => {
@@ -26,6 +27,20 @@ export class AppComponent {
       this.livres = data;      
     });
     
+  }
+
+  @HostListener('document:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    // Vérifie si la combinaison de touches est Ctrl + R
+    if (event.ctrlKey && event.key === 'r') {
+      // Empêche l'action par défaut de rechargement de la page
+      event.preventDefault();
+    }
+  }
+
+  logout() {
+    this.authService.logout();
+    this.router.navigateByUrl('/login');
   }
 
   onSearch(): void {

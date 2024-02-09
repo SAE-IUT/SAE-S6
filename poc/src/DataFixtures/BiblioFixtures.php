@@ -29,16 +29,16 @@ class BiblioFixtures extends Fixture
         $categories = [];
         foreach ($categoriesData as $categoryData) {
             [$nom, $description] = $categoryData;
-        
+
             $category = (new Categorie())
                 ->setNom($nom)
                 ->setDescription($description);
-        
+
             $categories[] = $category;
             $manager->persist($category);
         }
         $manager->flush();
-	
+
         // 2. Création des auteurs
         $auteurs = [];
         for ($i = 0; $i < 10; $i++) {
@@ -53,7 +53,7 @@ class BiblioFixtures extends Fixture
                 ->setDateNaissance(DateTimeImmutable::createFromMutable($dateNaissance))
                 ->setDateDeces(DateTimeImmutable::createFromMutable($dateDeces))
                 ->setNationalite($faker->country)
-                ->setPhoto('https://picsum.photos/360/360?image='.$i)
+                ->setPhoto('https://picsum.photos/360/360?image=' . $i)
                 ->setDescription($faker->sentence);
 
             $auteurs[] = $auteur;
@@ -71,7 +71,7 @@ class BiblioFixtures extends Fixture
                 ->setTitre($faker->name)
                 ->setDateSortie(DateTimeImmutable::createFromMutable($dateSortie))
                 ->setLangue($faker->languageCode)
-                ->setPhotoCouverture('https://picsum.photos/360/360?image='.($i+200));
+                ->setPhotoCouverture('https://picsum.photos/360/360?image=' . ($i + 200));
 
             // Ajout des auteurs au livre
             shuffle($auteurs);
@@ -101,7 +101,7 @@ class BiblioFixtures extends Fixture
             // $dateNaissance = DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-70 years', '-30 years'));
             $dateNaissance = $faker->dateTimeBetween('-70 years', '-30 years');
 
-            
+
 
             $adherent = (new Adherent())
                 ->setDateAdhesion(DateTimeImmutable::createFromMutable($dateAdhesion))
@@ -111,8 +111,8 @@ class BiblioFixtures extends Fixture
                 ->setEmail($faker->email)
                 ->setPassword($faker->password)
                 ->setAdressePostale($faker->postcode)
-                ->setNumTel($faker->phoneNumber)
-                ->setPhoto('https://picsum.photos/360/360?image='.($i+300));
+                ->setNumTel('09281723')
+                ->setPhoto('https://picsum.photos/360/360?image=' . ($i + 300));
 
             $adherents[] = $adherent;
             $manager->persist($adherent);
@@ -170,4 +170,3 @@ class BiblioFixtures extends Fixture
         $manager->flush();
     }
 }
-
