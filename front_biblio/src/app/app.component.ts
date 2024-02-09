@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { ApiService } from './services/api.service';
 import { Categorie } from './models/categorie';
 import { Livre } from './models/livre';
@@ -27,6 +27,15 @@ export class AppComponent {
       this.livres = data;      
     });
     
+  }
+
+  @HostListener('document:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    // Vérifie si la combinaison de touches est Ctrl + R
+    if (event.ctrlKey && event.key === 'r') {
+      // Empêche l'action par défaut de rechargement de la page
+      event.preventDefault();
+    }
   }
 
   logout() {

@@ -46,6 +46,7 @@ class Livre
 
 
     #[ORM\ManyToMany(targetEntity: Categorie::class, inversedBy: 'livres')]
+    #[Groups(['livre:read', 'livre:write', 'auteur: read', 'auteur: write'])]
     private Collection $categories;
 
     #[ORM\OneToMany(mappedBy: 'livre', targetEntity: Reservations::class)]

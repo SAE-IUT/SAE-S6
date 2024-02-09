@@ -1,0 +1,7 @@
+<form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <label for="nom">Nom :</label>
+        <input type="nom" class="form-control" id="nom" [(ngModel)]="model.nom" name="nom" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Valider</button>
+</form>

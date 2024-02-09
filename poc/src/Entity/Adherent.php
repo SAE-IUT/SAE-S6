@@ -39,29 +39,36 @@ class Adherent implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $dateAdhesion = null;
-
+    #[Groups(['adherent:read', 'adherent:write'])]
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['adherent:read', 'adherent:write'])]
     private ?string $prenom = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Groups(['adherent:read', 'adherent:write'])]
     private ?\DateTimeInterface $dateNaiss = null;
 
     #[ORM\Column]
+    #[Groups(['adherent:read', 'adherent:write'])]
     private ?int $adressePostale = null;
 
     #[ORM\Column]
+    #[Groups(['adherent:read', 'adherent:write'])]
     private ?int $numTel = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['adherent:read', 'adherent:write'])]
     private ?string $photo = null;
 
     #[ORM\ManyToMany(targetEntity: Emprunt::class, inversedBy: 'adherents')]
+    #[Groups(['adherent:read', 'adherent:write'])]
     private Collection $emprunt;
 
     #[ORM\OneToMany(mappedBy: 'adherent', targetEntity: Reservations::class)]
+    #[Groups(['adherent:read', 'adherent:write'])]
     private Collection $reservations;
 
     public function __construct()
@@ -70,7 +77,15 @@ class Adherent implements UserInterface, PasswordAuthenticatedUserInterface
         $this->reservations = new ArrayCollection();
     }
 
-
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
 
     /**
      * A visual identifier that represents this user.
@@ -80,6 +95,16 @@ class Adherent implements UserInterface, PasswordAuthenticatedUserInterface
     public function getUserIdentifier(): string
     {
         return (string) $this->email;
+    }
+
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUserIdentifier2(): string
+    {
+        return (string) $this->nom;
     }
 
     /**
@@ -124,10 +149,6 @@ class Adherent implements UserInterface, PasswordAuthenticatedUserInterface
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
     }
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
 
     public function getDateAdhesion(): ?\DateTimeInterface
     {
@@ -165,23 +186,23 @@ class Adherent implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-/**
- * @return \DateTimeInterface|null
- */
-public function getDateNaiss(): ?\DateTimeInterface
-{
-    return $this->dateNaiss;
-}
+    /**
+     * @return \DateTimeInterface|null
+     */
+    public function getDateNaiss(): ?\DateTimeInterface
+    {
+        return $this->dateNaiss;
+    }
 
-/**
- * @param \DateTimeInterface|null $dateNaiss
- */
-public function setDateNaiss(?\DateTimeInterface $dateNaiss): static
-{
-    $this->dateNaiss = $dateNaiss;
+    /**
+     * @param \DateTimeInterface|null $dateNaiss
+     */
+    public function setDateNaiss(?\DateTimeInterface $dateNaiss): static
+    {
+        $this->dateNaiss = $dateNaiss;
 
-    return $this;
-}
+        return $this;
+    }
 
 
     public function getEmail(): ?string
@@ -290,4 +311,3 @@ public function setDateNaiss(?\DateTimeInterface $dateNaiss): static
         return $this->nom;
     }
 }
-

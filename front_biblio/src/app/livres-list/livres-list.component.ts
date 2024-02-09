@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Livre } from '../models/livre';
 import { ApiService } from '../services/api.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-livres-list',
@@ -10,14 +11,17 @@ import { ApiService } from '../services/api.service';
 export class LivresListComponent {
   loading = true;
   livres: Livre[] = [];
+  logged: boolean = false;
  
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiService, private authService: AuthService) {}
 
   ngOnInit(): void {
+    if (this.authService.currentAuthUserValue.isLogged()) {
+      this.logged = true;
+    }
+
     this.apiService.getLivres().subscribe((data: Livre[]) => {
       this.livres = data;
-      console.log(this.livres);
-      
     });
 
     setTimeout(() => {

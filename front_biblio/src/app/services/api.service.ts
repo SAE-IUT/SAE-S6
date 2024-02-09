@@ -22,6 +22,15 @@ export class ApiService {
     return this.http.get<Adherent[]>(`${this.apiUrl}/adherents`);
   }
 
+  getAdherent(email: string): Observable<Adherent> {
+    return this.http.get<Adherent>(`${this.apiUrl}/adherent/${email}`);
+    // return this.http.get<Adherent>(`${this.apiUrl}/adherent/:id`);
+  }
+
+  editAdherent(): Observable<Adherent> {
+    return this.http.get<Adherent>(`${this.apiUrl}/adherent/edit`);
+  }
+
   // Ajouter un adherent
   addAdherent(adherent: Adherent): Observable<Adherent> {
     return this.http.post<Adherent>(`${this.apiUrl}/adherents`, adherent);

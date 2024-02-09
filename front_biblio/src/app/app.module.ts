@@ -15,6 +15,8 @@ import { LivreDetailComponent } from './livre-detail/livre-detail.component';
 import { LivresByCategoryComponent } from './livres-by-category/livres-by-category.component';
 import { AuthInterceptor } from './services/auth.interceptor';
 import { LoginComponent } from './login/login.component';
+import { ProfileComponent } from './profile/profile.component';
+import { EditAdherentComponent } from './edit-adherent/edit-adherent.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { LoginComponent } from './login/login.component';
     LivresListComponent,
     LivreDetailComponent,
     LivresByCategoryComponent,
-    LoginComponent
+    LoginComponent,
+    ProfileComponent,
+    EditAdherentComponent
   ],
   imports: [
     BrowserModule,
